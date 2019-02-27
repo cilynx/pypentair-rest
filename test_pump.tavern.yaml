@@ -32,3 +32,63 @@ stages:
         status_code: 200
         body:
            rpm: 200
+
+test_name: Speed
+
+stages:
+   - name: Get Speeds
+     request:
+        url: http://piab:5000/pump/1/speeds
+        method: GET
+     response:
+        status_code: 200
+        body:
+           speeds:
+             - index: 1
+               mode: 'MANUAL'
+               rpm: 1100
+               egg_timer: [0, 5]
+               schedule_end: [18, 0]
+               schedule_start: [11, 0]
+             - index: 2
+               mode: 'MANUAL'
+               rpm: 1500
+               egg_timer: [0, 5]
+               schedule_end: [18, 0]
+               schedule_start: [11, 0]
+             - index: 3
+               mode: 'MANUAL'
+               rpm: 2350
+               egg_timer: [0, 5]
+               schedule_end: [18, 0]
+               schedule_start: [11, 0]
+             - index: 4
+               mode: 'MANUAL'
+               rpm: 3110
+               egg_timer: [0, 5]
+               schedule_end: [18, 0]
+               schedule_start: [11, 0]
+             - index: 5
+               mode: 'DISABLED'
+               rpm: 1105
+               egg_timer: [0, 5]
+               schedule_end: [18, 0]
+               schedule_start: [11, 0]
+             - index: 6
+               mode: 'DISABLED'
+               rpm: 1500
+               egg_timer: [0, 5]
+               schedule_end: [18, 0]
+               schedule_start: [11, 0]
+             - index: 7
+               mode: 'DISABLED'
+               rpm: 2350
+               egg_timer: [0, 5]
+               schedule_end: [18, 0]
+               schedule_start: [11, 0]
+             - index: 8
+               mode: 'DISABLED'
+               rpm: 3110
+               egg_timer: [0, 5]
+               schedule_end: [18, 0]
+               schedule_start: [11, 0]

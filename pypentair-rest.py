@@ -26,6 +26,13 @@ speed_fields = {
     'egg_timer':            fields.List(fields.Integer)
 }
 
+class Speeds(Resource):
+    @marshal_with(speed_fields, envelope='speeds')
+    def get(self, pump_id):
+        return Pump(pump_id).speeds
+
+api.add_resource(Speeds, '/pump/<int:pump_id>/speeds')
+
 class Speed(Resource):
     @marshal_with(speed_fields, envelope='speed')
     def get(self, pump_id, speed_id):
