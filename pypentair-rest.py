@@ -12,7 +12,7 @@ class PumpRamp(Resource):
         return {'rpm': Pump(pump_id).ramp}
 
     def put(self, pump_id):
-        Pump(pump_id).ramp = request.form['rpm']
+        Pump(pump_id).ramp = int(request.form['rpm'])
         return {'rpm': Pump(pump_id).ramp}
 
 api.add_resource(PumpRamp, '/pump/<int:pump_id>/ramp')
