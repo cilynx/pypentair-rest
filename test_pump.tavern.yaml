@@ -33,6 +33,26 @@ stages:
         body:
            rpm: 200
 
+test_name: Program
+
+stages:
+   - name: Get Programs
+     request:
+        url: http://piab:5000/pump/1/programs
+        method: GET
+     response:
+        status_code: 200
+        body:
+           speeds:
+             - index: 1
+               rpm: 1105
+             - index: 2
+               rpm: 1105
+             - index: 3
+               rpm: 1105
+             - index: 4
+               rpm: 1105
+
 test_name: Speed
 
 stages:

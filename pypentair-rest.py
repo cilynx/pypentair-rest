@@ -45,6 +45,13 @@ program_fields = {
     'rpm':                  fields.Integer
 }
 
+class Programs(Resource):
+    @marshal_with(program_fields, envelope='programs')
+    def get(self, pump_id):
+        return Pump(pump_id).programs
+
+api.add_resource(Programs, '/pump/<int:pump_id>/programs')
+
 class Program(Resource):
     @marshal_with(program_fields, envelope='program')
     def get(self, pump_id, program_id):
