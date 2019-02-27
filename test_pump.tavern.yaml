@@ -1,0 +1,37 @@
+---
+test_name: Set Ramp
+stages:
+   - name: Set
+     request:
+        url: http://piab:5000/pump/1/ramp
+        data:
+           rpm: 100
+        method: PUT
+     response:
+        status_code: 200
+        body:
+           rpm: 100
+
+test_name: Get Ramp
+stages:
+   - name: Get
+     request:
+        url: http://piab:5000/pump/1/ramp
+        method: GET
+     response:
+        status_code: 200
+        body:
+           rpm: 100
+
+test_name: Set Ramp Back
+stages:
+   - name: Set Back
+     request:
+        url: http://piab:5000/pump/1/ramp
+        data:
+           rpm: 200
+        method: PUT
+     response:
+        status_code: 200
+        body:
+           rpm: 200
