@@ -1,5 +1,6 @@
 ---
-test_name: Set Ramp
+test_name: Ramp
+
 stages:
    - name: Set
      request:
@@ -12,8 +13,6 @@ stages:
         body:
            rpm: 100
 
-test_name: Get Ramp
-stages:
    - name: Get
      request:
         url: http://piab:5000/pump/1/ramp
@@ -23,8 +22,6 @@ stages:
         body:
            rpm: 100
 
-test_name: Set Ramp Back
-stages:
    - name: Set Back
      request:
         url: http://piab:5000/pump/1/ramp
