@@ -57,6 +57,10 @@ class Program(Resource):
     def get(self, pump_id, program_id):
         return Pump(pump_id).program(program_id)
 
+    def put(self, pump_id, program_id):
+        Pump(pump_id).program(program_id).rpm = int(request.form['rpm'])
+        return {'rpm': Pump(pump_id).program(program_id).rpm}
+
 api.add_resource(Program, '/pump/<int:pump_id>/program/<int:program_id>')
 
 pump_fields = {
