@@ -37,6 +37,15 @@ class PumpRamp(Resource):
 
 api.add_resource(PumpRamp, '/pump/<int:pump_id>/ramp')
 
+class PumpRPM(Resource):
+    def get(self, pump_id):
+        return {'rpm': Pump(pump_id).rpm}
+    def put(self, pump_id):
+        Pump(pump_id).rpm = int(request.form['rpm'])
+        return {'rpm': Pump(pump_id).rpm}
+
+api.add_resource(PumpRPM, '/pump/<int:pump_id>/rpm')
+
 speed_fields = {
     'mode':                 fields.String,
     'rpm':                  fields.Integer,
@@ -98,6 +107,16 @@ class PumpPump(Resource):
         return Pump(pump_id)
 
 api.add_resource(PumpPump, '/pump/<int:pump_id>')
+
+class PumpTRPM(Resource):
+    def get(self, pump_id):
+        return Pump(pump_id).trpm
+
+    def put(self, pump_id):
+        Pump(pump_id).trpm = int(request.form['rpm'])
+        return Pump(pump_id).trpm
+
+api.add_resource(PumpTRPM, '/pump/<int:pump_id>/trpm')
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0')
