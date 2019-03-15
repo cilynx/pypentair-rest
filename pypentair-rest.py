@@ -7,6 +7,26 @@ from pypentair import Pump
 app = Flask(__name__)
 api = Api(app)
 
+class PumpAddress(Resource):
+    def get(self, pump_id):
+        return {'address': Pump(pump_id).address}
+
+    def put(self, pump_id):
+        Pump(pump_id).address = int(request.form['address'])
+        return {'address': Pump(int(request.form['address']) - 95).address}
+
+api.add_resource(PumpAddress, '/pump/<int:pump_id>/address')
+
+class PumpID(Resource):
+    def get(self, pump_id):
+        return {'id': Pump(pump_id).id}
+
+    def put(self, pump_id):
+        Pump(pump_id).id = int(request.form['id'])
+        return {'id': Pump(int(request.form['id'])).id}
+
+api.add_resource(PumpID, '/pump/<int:pump_id>/id')
+
 class PumpRamp(Resource):
     def get(self, pump_id):
         return {'rpm': Pump(pump_id).ramp}
