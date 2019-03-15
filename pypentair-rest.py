@@ -67,6 +67,21 @@ class PumpSpeed(Resource):
     def get(self, pump_id, speed_id):
         return Pump(pump_id).speed(speed_id)
 
+    @marshal_with(speed_fields, envelope='speed')
+    def put(self, pump_id, speed_id):
+        speed = Pump(pump_id).speed(speed_id)
+        if request.form.get('mode'):
+            speed.mode = request.form['mode']
+        if request.form.get('rpm'):
+            speed.rpm = int(request.form['rpm'])
+        if request.form.get('schedule_start'):
+            speed.schedule_start = [int(x) for x in request.form['schedule_start'].split(',')]
+        if request.form.get('schedule_end'):
+            speed.schedule_end = [int(x) for x in request.form['schedule_end'].split(',')]
+        if request.form.get('egg_timer'):
+            speed.egg_timer = [int(x) for x in request.form['egg_timer'].split(',')]
+        return speed
+
 api.add_resource(PumpSpeed, '/pump/<int:pump_id>/speed/<int:speed_id>')
 
 program_fields = {
