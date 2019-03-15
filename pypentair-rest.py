@@ -108,6 +108,36 @@ class PumpPump(Resource):
 
 api.add_resource(PumpPump, '/pump/<int:pump_id>')
 
+class PumpSoftPrimeCounter(Resource):
+    def get(self, pump_id):
+        return Pump(pump_id).soft_prime_counter
+
+api.add_resource(PumpSoftPrimeCounter, '/pump/<int:pump_id>/soft_prime_counter')
+
+class PumpSVRSAlarm(Resource):
+    def get(self, pump_id):
+        return Pump(pump_id).svrs_alarm
+
+api.add_resource(PumpSVRSAlarm, '/pump/<int:pump_id>/svrs_alarm')
+
+class PumpSVRSRestartEnable(Resource):
+    def get(self, pump_id):
+        return Pump(pump_id).svrs_restart_enable
+    def put(self, pump_id):
+        Pump(pump_id).svrs_restart_enable = int(request.form['state'])
+        return Pump(pump_id).svrs_restart_enable
+
+api.add_resource(PumpSVRSRestartEnable, '/pump/<int:pump_id>/svrs_restart_enable')
+
+class PumpSVRSTimer(Resource):
+    def get(self, pump_id):
+        return Pump(pump_id).svrs_restart_timer
+    def put(self, pump_id):
+        Pump(pump_id).svrs_restart_timer = int(request.form['time'])
+        return Pump(pump_id).svrs_restart_timer
+
+api.add_resource(PumpSVRSTimer, '/pump/<int:pump_id>/svrs_restart_timer')
+
 class PumpTRPM(Resource):
     def get(self, pump_id):
         return Pump(pump_id).trpm
