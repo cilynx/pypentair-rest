@@ -46,14 +46,14 @@ speed_fields = {
     'egg_timer':            fields.List(fields.Integer)
 }
 
-class Speeds(Resource):
+class PumpSpeeds(Resource):
     @marshal_with(speed_fields, envelope='speeds')
     def get(self, pump_id):
         return Pump(pump_id).speeds
 
 api.add_resource(Speeds, '/pump/<int:pump_id>/speeds')
 
-class Speed(Resource):
+class PumpSpeed(Resource):
     @marshal_with(speed_fields, envelope='speed')
     def get(self, pump_id, speed_id):
         return Pump(pump_id).speed(speed_id)
@@ -65,14 +65,14 @@ program_fields = {
     'rpm':                  fields.Integer
 }
 
-class Programs(Resource):
+class PumpPrograms(Resource):
     @marshal_with(program_fields, envelope='programs')
     def get(self, pump_id):
         return Pump(pump_id).programs
 
 api.add_resource(Programs, '/pump/<int:pump_id>/programs')
 
-class Program(Resource):
+class PumpProgram(Resource):
     @marshal_with(program_fields, envelope='program')
     def get(self, pump_id, program_id):
         return Pump(pump_id).program(program_id)
@@ -92,7 +92,7 @@ pump_fields = {
     'speeds':               fields.Nested(speed_fields)
 }
 
-class PumpAPI(Resource):
+class PumpPump(Resource):
     @marshal_with(pump_fields, envelope='pump')
     def get(self, pump_id):
         return Pump(pump_id)
