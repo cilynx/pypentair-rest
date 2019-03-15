@@ -51,14 +51,14 @@ class PumpSpeeds(Resource):
     def get(self, pump_id):
         return Pump(pump_id).speeds
 
-api.add_resource(Speeds, '/pump/<int:pump_id>/speeds')
+api.add_resource(PumpSpeeds, '/pump/<int:pump_id>/speeds')
 
 class PumpSpeed(Resource):
     @marshal_with(speed_fields, envelope='speed')
     def get(self, pump_id, speed_id):
         return Pump(pump_id).speed(speed_id)
 
-api.add_resource(Speed, '/pump/<int:pump_id>/speed/<int:speed_id>')
+api.add_resource(PumpSpeed, '/pump/<int:pump_id>/speed/<int:speed_id>')
 
 program_fields = {
     'index':                fields.Integer,
@@ -70,7 +70,7 @@ class PumpPrograms(Resource):
     def get(self, pump_id):
         return Pump(pump_id).programs
 
-api.add_resource(Programs, '/pump/<int:pump_id>/programs')
+api.add_resource(PumpPrograms, '/pump/<int:pump_id>/programs')
 
 class PumpProgram(Resource):
     @marshal_with(program_fields, envelope='program')
@@ -81,7 +81,7 @@ class PumpProgram(Resource):
         Pump(pump_id).program(program_id).rpm = int(request.form['rpm'])
         return {'rpm': Pump(pump_id).program(program_id).rpm}
 
-api.add_resource(Program, '/pump/<int:pump_id>/program/<int:program_id>')
+api.add_resource(PumpProgram, '/pump/<int:pump_id>/program/<int:program_id>')
 
 pump_fields = {
     'id':                   fields.Integer,
@@ -97,7 +97,7 @@ class PumpPump(Resource):
     def get(self, pump_id):
         return Pump(pump_id)
 
-api.add_resource(PumpAPI, '/pump/<int:pump_id>')
+api.add_resource(PumpPump, '/pump/<int:pump_id>')
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0')
